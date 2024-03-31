@@ -61,7 +61,6 @@ class FileStorage:
         :param cls: class
         :return: number of instances
         """
-
         return len(self.all(cls))
 
     def save(self):

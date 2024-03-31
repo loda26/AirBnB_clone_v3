@@ -77,6 +77,7 @@ class DBStorage:
         :return: count of instances of a class
         """
         return len(self.all(cls))
+        
 
     def save(self):
         """commit all changes of the current database session"""
