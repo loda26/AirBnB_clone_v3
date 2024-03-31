@@ -28,7 +28,6 @@ def get_state(state_id):
         return(state_obj.to_dict())
     else:
         return abort(404)
-    
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
