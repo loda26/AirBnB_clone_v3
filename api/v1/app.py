@@ -34,6 +34,7 @@ def handle_404(exception):
     }
 
     resp = jsonify(data)
+    resp.status_code = 404
     return resp
 
 
