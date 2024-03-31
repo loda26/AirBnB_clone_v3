@@ -21,6 +21,7 @@ def status():
     resp = jsonify(data)
     return resp
 
+
 @app_views.route('/stats')
 def stats():
     """
