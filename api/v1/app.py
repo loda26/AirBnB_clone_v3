@@ -34,7 +34,7 @@ def handle_404(exception):
     }
 
     resp = jsonify(data)
-    return data
+    return resp
 
 
 if __name__ == "__main__":
