@@ -98,7 +98,7 @@ def city_put(city_id):
     city_json = request.get_json()
     if city_json is None:
         return abort(400, 'Not a JSON')
-    
+
     for key, vlaue in city_json.items():
         if key not in ["id", "created_at", "updated_at", "state_id"]:
             setattr(city_obj, key, vlaue)
