@@ -3,29 +3,29 @@
 Method HTTP for States
 """
 
+from api.v1.views import app_views
 from flask import jsonify, abort, request
-from api.v1.views import app_views, storage
+from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods=["GET"], strict_slashes=False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
-    """
-    Function that retrieves the list of all State
-    """
-    state_obj = storage.all(State).values()
-    state_list= [state_obj.to_dict() for state in state_obj]
-    return jsonify(state_list)
+    """ Function that retrieves the list of all State """
+    all_states = []
+    for state in storage.all(State).values():
+        all_states.append(state.to_dict())
+    return jsonify(all_states)
 
 
-@app_views.route('/states/<state_id>', methods=["GET"], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """
     Function that retrieves a State
     """
     state_obj = storage.get(State, state_id)
     if state_obj:
-        return jsonify(state_obj.to_dict())
+        return (state_obj.to_dict())
     else:
         return abort(404)
 
