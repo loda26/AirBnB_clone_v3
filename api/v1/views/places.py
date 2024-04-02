@@ -49,12 +49,12 @@ def delete_place(place_id):
     """
     fetched_obj = storage.get(Place, place_id)
 
-    if fetched_obj is None:
-        abort(404)
-
-    storage.delete(fetched_obj)
-    storage.save()
-    return jsonify({}), 200
+    if fetched_obj:
+        storage.delete(fetched_obj)
+        storage.save()
+        return jsonify({}), 200
+    else:
+        return abort(404)
 
 
 @app_views.route("/cities/<city_id>/places", methods=["POST"],
