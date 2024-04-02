@@ -33,7 +33,7 @@ def get_place(place_id):
     :return: place obj with the specified id or error
     """
     place_obj = storage.get(Place, place_id)
-    if not place_obj:
+    if place_obj is None:
         return abort(404)
     else:
         return jsonify(place_obj.to_dict())
@@ -70,6 +70,8 @@ def create_place(city_id):
     city_json = request.get_json()
     if not city_json:
         return abort(404, 'Not a JSON')
+    if not storage.get("User", city_json["user_id"]):
+        abort(404)
     if 'user_id' not in city_json:
         return abort(400, 'Missing user_id')
     if 'name' not in city_json:
