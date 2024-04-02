@@ -13,8 +13,8 @@ def get_all_users():
     retrieves all user objects
     :return: json of all states
     """
-    user_obj = storage.all(User)
-    return jsonify([user.to_dict() for user in user_obj])
+    users = storage.all(User)
+    return jsonify([user.to_dict() for user in users])
 
 
 @app_views.route("/users/<user_id>",  methods=["GET"],
