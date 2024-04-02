@@ -47,13 +47,14 @@ def delete_place(place_id):
     :param place_id: Place object id
     :return: empty dict with 200 or 404 if not found
     """
-    place_obj = storage.get(Place, place_id)
-    if not place_obj:
-        return abort(404)
-    else:
-        storage.delete(place_obj)
-        storage.save()
-        return jsonify({}), 200
+    fetched_obj = storage.get(Place, place_id)
+
+    if fetched_obj is None:
+        abort(404)
+
+    storage.delete(fetched_obj)
+    storage.save()
+    return jsonify({}), 200
 
 
 @app_views.route("/cities/<city_id>/places", methods=["POST"],
