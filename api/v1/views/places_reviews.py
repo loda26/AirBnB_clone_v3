@@ -64,7 +64,7 @@ def creat_reviewe(place_id):
     create REview route
     :return: newly created Review obj
     """
-    review_json = request.get_json()
+    review_json = request.get_json(silent=True)
     if review_json is None:
         return abort(400, 'Not a JSON')
     if not storage.get(Place, place_id):
