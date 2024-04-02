@@ -16,13 +16,12 @@ def get_places_by_city(city_id):
     retrieves all Place objects by city
     :return: json of all Places
     """
-    place_list = []
     city_obj = storage.get(City, city_id)
     if not city_obj:
         return abort(404)
-    for obj in city_obj.places:
-        place_list.append(obj.to_dict())
-    return jsonify(place_list)
+
+    places = [place.to_dict() for place in city_obj.places]
+    return jsonify(places)
 
 
 @app_views.route("/places/<place_id>",  methods=["GET"],
