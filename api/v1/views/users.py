@@ -13,8 +13,10 @@ def get_all_users():
     retrieves all user objects
     :return: json of all states
     """
-    users = storage.all(User)
-    return jsonify([user.to_dict() for user in users])
+    am_list = []
+    for key, value in storage.all(User).items():
+        am_list.append(value.to_dict())
+    return jsonify(am_list)
 
 
 @app_views.route("/users/<user_id>",  methods=["GET"],
@@ -61,8 +63,10 @@ def create_user():
     user_json = request.get_json()
     if user_json is None:
         return abort(400, 'Not a JSON')
-    if 'name' not in user_json:
-        return abort(400, 'Missing name')
+    if 'email' not in user_json:
+        return abort(400, 'Missing email')
+    if 'password' not in user_json:
+        return abort(400, 'Missing password')
 
     new_user = User(**user_json)
     new_user.save()
